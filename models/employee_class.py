@@ -1,5 +1,6 @@
 import models.DB_class as db
 from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy.orm import relationship 
 import datetime
 
 class Employee(db.Base):
@@ -12,6 +13,9 @@ class Employee(db.Base):
     salary = Column(Integer, nullable=False)
     works_from = Column(Date, default=datetime.date.today())
     department_id = Column(Integer, ForeignKey("departments.id"))
+
+    departments = relationship('Department', back_populates='managers')
+    project_associations = relationship('Employee_Project', back_populates='employee')
 
     def __init__(self, name, last_name, dob, position, salary, department_id):
         self.name = name
@@ -26,5 +30,3 @@ class Employee(db.Base):
     
     def __repr__(self):
         return f"{self.id} | {self.name}"
-
-db.Base.metadata.create_all(db.engine)

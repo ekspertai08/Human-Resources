@@ -3,7 +3,7 @@ import colorama
 from colorama import Fore
 colorama.init(autoreset=True)
 
-art.tprint("HR      Management      app")
+# art.tprint("HR      Management      app")
 def main_menu():
     while True:
         print(f"""{Fore.CYAN}

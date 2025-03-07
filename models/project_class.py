@@ -1,4 +1,5 @@
 import models.DB_class as db
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Date, ForeignKey
 
 class Project(db.Base):
@@ -6,6 +7,8 @@ class Project(db.Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False)
     description = Column(String(100), nullable=False)
+
+    employee_associations = relationship('Employee_Project', back_populates='project')
 
     def __init__(self, name, description):
         self.name = name
@@ -16,5 +19,3 @@ class Project(db.Base):
     
     def __repr__(self):
         return f"{self.name}"
-        
-db.Base.metadata.create_all(db.engine)
