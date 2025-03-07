@@ -11,7 +11,7 @@ class Employee(db.Base):
     position = Column(String(50), nullable=False)
     salary = Column(Integer, nullable=False)
     works_from = Column(Date, default=datetime.date.today())
-    department_id = Column(Integer, ForeignKey(department.id))
+    department_id = Column(Integer, ForeignKey("departments.id"))
 
     def __init__(self, name, last_name, dob, position, salary, department_id):
         self.name = name
