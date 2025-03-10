@@ -12,18 +12,19 @@ class Employee(db.Base):
     position = Column(String(50), nullable=False)
     salary = Column(Integer, nullable=False)
     works_from = Column(Date, default=datetime.date.today())
-    department_id = Column(Integer, ForeignKey("departments.id"))
+    department_id = Column(Integer, ForeignKey("departments.id", use_alter=True), nullable=True)
 
-    departments = relationship('Department', back_populates='managers')
+    managed_departments = relationship('Department', back_populates='manager', foreign_keys='Department.manager_id')
+    department = relationship('Department', back_populates='employees', foreign_keys=[department_id])
+
     project_associations = relationship('Employee_Project', back_populates='employee')
 
-    def __init__(self, name, last_name, dob, position, salary, department_id):
+    def __init__(self, name, last_name, dob, position, salary):
         self.name = name
         self.last_name = last_name
         self.dob = dob
         self.position = position
         self.salary = salary
-        self.department_id = department_id
     
     def __str__(self):
         return f"{self.id} | {self.name} | {self.last_name} | {self.dob} | {self.position} | {self.salary} | {self.works_from} | {self.department_id}"

@@ -1,4 +1,5 @@
-import models.department_class
 import models.employee_class
+import models.department_class
+
 import models.employee_project_class
 import models.project_class

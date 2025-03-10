@@ -3,6 +3,9 @@ import colorama
 from colorama import Fore
 colorama.init(autoreset=True)
 
+from services.department_actions import create_new_department
+from services.employee_actions import create_new_employee
+
 # art.tprint("HR      Management      app")
 def main_menu():
     while True:
@@ -24,7 +27,7 @@ def main_menu():
         if user_input == "0":
             break
         elif user_input == "1":
-            pass
+            create_new_employee()
         elif user_input == "2":
             pass
         elif user_input == "3":
@@ -40,7 +43,8 @@ def main_menu():
         elif user_input == "8":
             pass
         elif user_input == "9":
-            pass
+            create_new_department()
+            break
         elif user_input == "10":
             pass
         elif user_input == "11":
