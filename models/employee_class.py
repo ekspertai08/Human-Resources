@@ -27,7 +27,7 @@ class Employee(db.Base):
         self.salary = salary
     
     def __str__(self):
-        return f"{self.id} | {self.name} | {self.last_name} | {self.dob} | {self.position} | {self.salary} | {self.works_from} | {self.department_id}"
+        return f"{self.name} | {self.last_name} | {self.dob} | {self.position} | {self.salary} | {self.works_from} | {self.department_id}"
     
     def __repr__(self):
         return f"{self.id} | {self.name}"
