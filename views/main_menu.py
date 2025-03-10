@@ -4,6 +4,7 @@ from colorama import Fore
 colorama.init(autoreset=True)
 
 import services.employee_actions as emp_act
+import services.project_actions as pro_act
 
 art.tprint("HR      Management      app")
 def main_menu():
@@ -36,11 +37,11 @@ def main_menu():
         elif user_input == "5":
             emp_act.delete_employee()
         elif user_input == "6":
-            pass
+            pro_act.add_new_project()
         elif user_input == "7":
-            pass
+            pro_act.assign_employee_to_project()
         elif user_input == "8":
-            pass
+            pro_act.show_emloyee_projects()
         elif user_input == "9":
             # create_new_department()
             break

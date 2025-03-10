@@ -172,6 +172,8 @@ def update_employee():
             setattr(upd_employee, column_name, user_new_value)
             sesion.commit()
             print(f"{Fore.GREEN}Darbuotojas atnaujintas sėkmingai.")
+            
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 def delete_employee():
     show_all_employees()
