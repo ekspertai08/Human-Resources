@@ -30,11 +30,11 @@ def main_menu():
         elif user_input == "2":
             emp_act.show_all_employees()
         elif user_input == "3":
-            pass
+            emp_act.search_for_employee()
         elif user_input == "4":
-            pass
+            emp_act.update_employee()
         elif user_input == "5":
-            pass
+            emp_act.delete_employee()
         elif user_input == "6":
             pass
         elif user_input == "7":
