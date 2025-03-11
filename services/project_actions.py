@@ -77,9 +77,9 @@ def assign_employee_to_project():
         with session_maker() as session:
             querry = select(emp_cl.Employee).filter_by(id=user_input_emp)
             employee = session.execute(querry).scalar_one()
-            querry = select(pro_cl).filter_by(id=user_input_pro)
+            querry = select(pro_cl.Project).filter_by(id=user_input_pro)
             project = session.execute(querry).scalar_one()
-            new_employee_project = emp_pro_cl.Employee_Project(employee_id=employee, project_id=project)
+            new_employee_project = emp_pro_cl.Employee_Project(employee_id=employee.id, project_id=project.id)
             session.add(new_employee_project)
             session.commit()
             print(f"{Fore.GREEN}Projektas priskirtas sėkmingai.")
@@ -89,7 +89,7 @@ def assign_employee_to_project():
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 def show_emloyee_projects():
-    if get_employees_id_list and get_projects_id_list:
+    if get_employees_id_list() and get_projects_id_list():
         show_all_employees()
         while True:
             try:
@@ -104,11 +104,15 @@ def show_emloyee_projects():
             except IndexError:
                 print(f"{Fore.RED}Darbuotojo tokiu indeksu nėra. Bandykite dar kartą.")
         with session_maker() as session:
-            querry = select(emp_pro_cl.Employee_Project).filter_by(employee_id=user_input_emp)
-            employee = session.execute(querry).scalars().all()
-            print([assoc.name for assoc in employee.project_associations])
-            # print(employee_project)
+            employee = session.execute(select(emp_cl.Employee).filter_by(id=user_input_emp)).scalar_one_or_none()
+            if employee:
+                projects = [assoc.project for assoc in employee.project_associations]
+                if projects:
+                    print("Darbuotojo projektai:")
+                    for project in projects:
+                        print(project)
+                else:
+                    print(f"{Fore.RED}Darbuotojas neturi priskirtų projektų.")
+            
     else:
-        print(f"{Fore.RED}Darbuotojų arba projektų sąrašas tuščias.")
-
-        #  return [(assoc.publisher.name, assoc.extra_info) for assoc in book.publisher_associations]
+        print(f"{Fore.RED}Darbuotojų sąrašas arba projektų sąrašas tuščias.")
