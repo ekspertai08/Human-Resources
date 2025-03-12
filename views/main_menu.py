@@ -5,6 +5,7 @@ colorama.init(autoreset=True)
 
 import services.employee_actions as emp_act
 import services.project_actions as pro_act
+import services.department_actions as dep_act
 
 art.tprint("HR      Management      app")
 def main_menu():
@@ -43,11 +44,10 @@ def main_menu():
         elif user_input == "8":
             pro_act.show_emloyee_projects()
         elif user_input == "9":
-            # create_new_department()
-            break
+            dep_act.create_new_department()
         elif user_input == "10":
-            pass
+            dep_act.assign_employee_to_department()
         elif user_input == "11":
-            pass
+            dep_act.show_department_employees()
         else:
             print(f"{Fore.RED}Tokio pasirinkimo nėra. Bandykite dar kartą.")
